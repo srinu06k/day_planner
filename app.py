@@ -14,15 +14,13 @@ st.title("🧠 FocusBuddy - Your Day Planner")
 
 user_input = st.text_input("Say something to FocusBuddy 👇")
 
-if st.button("Send") and user_input:
-    output = query({"inputs": user_input})
-    
-    # ✅ Moved try block inside the condition to avoid undefined 'output'
-  if st.button("Send") and user_input:
-    output = query({"inputs": user_input})
-    try:
-        st.write("💬 FocusBuddy:", output[0]["generated_text"])
-    except (KeyError, IndexError, TypeError):
-        st.warning("⚠️ The model didn’t return any response. Try again after a few seconds.")
-        st.json(output)  # Optional: View raw output
-
+if st.button("Send"):
+    if user_input:
+        output = query({"inputs": user_input})
+        try:
+            st.write("💬 FocusBuddy:", output[0]["generated_text"])
+        except (KeyError, IndexError, TypeError):
+            st.warning("⚠️ The model didn’t return any response. Try again after a few seconds.")
+            st.json(output)
+    else:
+        st.warning("⚠️ Please enter a message before sending.")
