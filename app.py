@@ -1,9 +1,11 @@
 import streamlit as st
 import requests
 
-# ✅ Replace with your actual Hugging Face token
-HF_TOKEN = "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"
-API_URL = "https://api-inference.huggingface.co/models/Qwen/Qwen2.5-72B-Instruct"
+# ✅ Use your actual Hugging Face token here
+HF_TOKEN = "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"
+
+# ✅ Set DeepSeek model URL
+API_URL = "https://api-inference.huggingface.co/models/deepseek-ai/DeepSeek-V3-0324"
 headers = {"Authorization": f"Bearer {HF_TOKEN}"}
 
 def query(payload):
@@ -14,13 +16,11 @@ st.title("🧠 FocusBuddy - Your Day Planner")
 
 user_input = st.text_input("Say something to FocusBuddy 👇")
 
-if st.button("Send"):
-    if user_input:
+if st.button("Send") and user_input:
+    with st.spinner("Thinking..."):
         output = query({"inputs": user_input})
         try:
             st.write("💬 FocusBuddy:", output[0]["generated_text"])
         except (KeyError, IndexError, TypeError):
             st.warning("⚠️ The model didn’t return any response. Try again after a few seconds.")
             st.json(output)
-    else:
-        st.warning("⚠️ Please enter a message before sending.")
