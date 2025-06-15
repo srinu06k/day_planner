@@ -4,7 +4,7 @@ import requests
 # ✅ Replace with your actual Hugging Face token
 HF_TOKEN = "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"
 API_URL = "https://api-inference.huggingface.co/models/Qwen/Qwen2.5-72B-Instruct"
-headers = {"Authorization": f"Bearer {https://api-inference.huggingface.co/models/Qwen/Qwen2.5-72B-Instruct}"}
+headers = {"Authorization": f"Bearer {HF_TOKEN}"}
 
 def query(payload):
     response = requests.post(API_URL, headers=headers, json=payload)
